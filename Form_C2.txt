@@ -1,0 +1,492 @@
+//‰„«Ì‘ ’›ÕÂ
+$("#236877441638355a1567489033441926").css({"backgroundColor":"#ccccff"});
+$("#236877441638355a1567489033441926").css({"border":"3px double #336699"});
+
+$("#title0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#336699","border-radius":"5px"});
+$("#title0000000001").css({"text-align":"center"});
+
+$("#subtitle0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000001").css({"text-align":"right"});
+
+$("#subtitle0000000002").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000003").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000004").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000005").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000006").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000007").css({"font-family":"b titr","text-align":"right"});
+
+$("#Description").css({"font-family":"b Titr","background-color":"#ff9966","border-radius":"5px"});
+$("#Subject").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Suppliers").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});;;;
+$("#Personnel").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Projects").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Amount").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Location").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+
+$("#Subject_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Suppliers_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Personnel_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Projects_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Amount_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Location_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+
+$("#Var_Comment_Member_Plan").css({"background-color":"#ffffcc","font-family":"b nazanin","margin-top":"20px"});
+
+$("#submit0000000001").css({"font-family":"b titr","margin-top":"20px"});
+
+$("#Check_Button").css({"font-family":"b titr","margin-top":"20px"});
+
+
+$("#Contract_Counter").hide();
+
+//  «—ÌŒÂ«Ì ‘„”Ì
+$("input[id *= 'Committee_Enactment_Date']").datepicker();
+$("input[id *= 'Directors_Enactment_Date']").datepicker();
+$("input[id *= 'Contract_Date']").datepicker();
+$("input[id *= 'Notification_Date']").datepicker();
+$("input[id *= 'Contract_Active_Date']").datepicker();
+$("input[id *= 'Budget_Date']").datepicker();
+
+//Å— ﬂ—œ‰ ‘—Õ Ê  Ê÷ÌÕ«   --- 
+
+if ($("#Description").getNumberRows() == 1 && $("#Description").getValue (1,1) =="") {
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',false);
+  	$("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  }else{
+	$("#Description").addRow();
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',false); 
+    $("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  };
+
+// »——”Ì «ÿ·«⁄«  „—»Êÿ »Â «ÿ·«⁄«  Ã«‰»Ì Ê  ÂÌÂ ﬂœ ﬁ—«—œ«œ
+
+$("#submit0000000001").hide();
+
+$("#Check_Button").find("button").click(function(Subject,Suppliers,Personnel,Projects,Amount,Location,D,CT,CP,CS,Y,CC,FVal,CVal,i,j,check,Counter) {
+  
+// »——”Ì ‰Ê⁄ ﬁ—«—œ«œ Ê ‘Œ’Ì  
+  
+  CS = $("#Contract_Status").getValue();
+  $("#submit0000000001").hide();
+  
+  if (CS == "") {
+    
+    $('#Contract_Status').getControl().css("background-color", "pink");
+    alert ("Ê÷⁄Ì  ﬁ—«—œ«œ —« «‰ Œ«» ﬂ‰Ìœ !"); 
+    
+  } else {
+    
+    $('#Contract_Status').getControl().css("background-color", "lightgreen");
+    
+  }
+  
+  
+// „Ê÷Ê⁄ ﬁ—«—œ«œ 
+  
+  Counter = 0;
+  check = "Yes";
+  Subject = $("#Subject").getNumberRows();
+      i = 1; 
+      while (i-1 < Subject){
+      
+      	$("#Subject").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Subject) {
+    
+      FVal = $("#Subject").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì „Ê÷Ê⁄ ﬁ—«—œ«œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Subject').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Subject){
+        
+          CVal = $("#Subject").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì „Ê÷Ê⁄«  ﬁ—«—œ«œ „‘«»Â Â” ‰œ!");
+            $('#Subject').getControl(i,2).css("background-color", "pink");
+            $('#Subject').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Subject){
+      
+      	$("#Subject").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  }
+
+// ÿ—› ﬁ—«—œ«œ ( «„Ì‰ ﬂ‰‰œê«‰)   
+  check = "Yes";
+  Suppliers = $("#Suppliers").getNumberRows();
+      i = 1; 
+      while (i-1 < Suppliers){
+      
+      	$("#Suppliers").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Suppliers) {
+    
+      FVal = $("#Suppliers").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì ÿ—› ﬁ—«—œ«œ ( «„Ì‰ ﬂ‰‰œê«‰) »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Suppliers').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Suppliers){
+        
+          CVal = $("#Suppliers").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì ÿ—› ﬁ—«—œ«œ ( «„Ì‰ ﬂ‰‰œê«‰) „‘«»Â Â” ‰œ!");
+            $('#Suppliers').getControl(i,2).css("background-color", "pink");
+            $('#Suppliers').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Suppliers){
+      
+      	$("#Suppliers").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+     
+      }
+    
+    Counter++;
+    
+  }
+  
+//«‰ Œ«» ‘€·
+  check = "Yes";
+  Personnel = $("#Personnel").getNumberRows();
+      i = 1; 
+      while (i-1 < Personnel){
+      
+      	$("#Personnel").getControl(i,3).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Personnel) {
+    
+      FVal = $("#Personnel").getValue(i,3);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì ‘€· ›—œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Personnel').getControl(i,3).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Personnel){
+        
+          CVal = $("#Personnel").getValue(j,3);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì ‘€· ›—œ „‘«»Â Â” ‰œ!");
+            $('#Personnel').getControl(i,3).css("background-color", "pink");
+            $('#Personnel').getControl(j,3).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Personnel){
+      
+      	$("#Personnel").getControl(i,3).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  }
+  
+// Å—ÊéÂùÂ«Ì „— »ÿ »« ﬁ—«—œ«œ 
+  
+  check = "Yes";
+  Projects = $("#Projects").getNumberRows();
+      i = 1; 
+      while (i-1 < Projects){
+      
+      	$("#Projects").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Projects) {
+    
+      FVal = $("#Projects").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì ÿ—› Å—ÊéÂùÂ«Ì „— »ÿ »« ﬁ—«—œ«œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Projects').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Projects){
+        
+          CVal = $("#Projects").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì Å—ÊéÂùÂ«Ì „— »ÿ »« ﬁ—«—œ«œ „‘«»Â Â” ‰œ!");
+            $('#Projects').getControl(i,2).css("background-color", "pink");
+            $('#Projects').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Projects){
+      
+      	$("#Projects").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  }
+  
+// Amount
+  
+check = "Yes";
+  Amount = $("#Amount").getNumberRows();
+      i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,1).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Amount) {
+    
+      FVal = $("#Amount").getValue(i,1);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì Ê«Õœ ÅÊ·Ì »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Amount').getControl(i,1).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Amount){
+        
+          CVal = $("#Amount").getValue(j,1);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì Ê«ÕœÂ«Ì ÅÊ·Ì „‘«»Â Â” ‰œ!");
+            $('#Amount').getControl(i,1).css("background-color", "pink");
+            $('#Amount').getControl(j,1).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+    if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,1).css("background-color", "lightgreen");
+        i++;
+      
+      }
+      
+      Counter++;
+      
+    }
+  
+  check = "Yes";
+  Amount = $("#Amount").getNumberRows();
+      i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Amount) {
+    
+      FVal = $("#Amount").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì „»·€ »—«Ì —œÌ› " + i + " œ—Ã ‘Êœ!");
+        $('#Amount').getControl(i,2).css("background-color", "pink");
+        check = "No";
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    Counter++;
+  }
+  
+// Location
+  check = "Yes";
+  Location = $("#Location").getNumberRows();
+      i = 1; 
+      while (i-1 < Location){
+      
+      	$("#Location").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Location) {
+    
+      FVal = $("#Location").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì „Õ·Â«Ì „— »ÿ »« ﬁ—«—œ«œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Location').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Location){
+        
+          CVal = $("#Location").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì „Õ·Â«Ì „— »ÿ »« ﬁ—«—œ«œ „‘«»Â Â” ‰œ!");
+            $('#Location').getControl(i,2).css("background-color", "pink");
+            $('#Location').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Location){
+      
+      	$("#Location").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  }
+  
+  // »——”Ì ‘—Õ
+  
+    D =  $("#Description").getValue($("#Description").getNumberRows(),2);
+  	switch (true) {
+   
+    case ( D == ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      alert ("‰ﬂ«  «’·«ÕÌ —« Ê«—œ ‰„«ÌÌœ ...");
+      break;
+        
+    case ( D != ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      Counter++;
+      break;        
+      
+  }
+  
+  //  ‰„«Ì‘ œﬂ„Â À»  «ÿ·«⁄«  Ê  Ê·Ìœ ﬂœ ﬁ—«—œ«œ
+  
+  if (Counter == 8) {
+    
+    $("#submit0000000001").show();
+        
+  }
+  
+});

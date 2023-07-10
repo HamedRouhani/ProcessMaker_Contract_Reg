@@ -1,0 +1,872 @@
+//‰„«Ì‘ ’›ÕÂ
+$("#729644775638309925b14d5071008987").css({"backgroundColor":"#ccccff"});
+$("#729644775638309925b14d5071008987").css({"border":"3px double #336699"});
+
+$("#title0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#336699","border-radius":"5px"});
+$("#title0000000001").css({"text-align":"center"});
+
+$("#subtitle0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000001").css({"text-align":"right"});
+
+$("#subtitle0000000002").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000002").css({"text-align":"right"});
+
+$("#subtitle0000000009").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000009").css({"text-align":"right"});
+
+$("#subtitle0000000003").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000004").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000005").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000006").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000007").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000008").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000010").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000011").css({"font-family":"b titr","text-align":"right"});
+
+$("#Description").css({"font-family":"b Titr","background-color":"#ff9966","border-radius":"5px"});
+$("#Subject").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Suppliers").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});;;;
+$("#Personnel").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Projects").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Amount").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Location").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Subject_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Suppliers_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});;;;
+$("#Personnel_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Projects_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Amount_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Location_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+
+$("#Var_Comment_Member_Plan").css({"background-color":"#ffffcc","font-family":"b nazanin","margin-top":"20px"});
+
+$("#submit0000000001").css({"font-family":"b titr","margin-top":"20px","background-color":"#99ccff"});
+
+$("#Check_Button").css({"font-family":"b titr","margin-top":"20px"});
+
+
+//  «—ÌŒÂ«Ì ‘„”Ì
+
+$("input[id *= 'Committee_Enactment_Date']").datepicker();
+$("input[id *= 'Directors_Enactment_Date']").datepicker();
+$("input[id *= 'Contract_Date']").datepicker();
+$("input[id *= 'Notification_Date']").datepicker();
+$("input[id *= 'Contract_Active_Date']").datepicker();
+$("input[id *= 'Budget_Date']").datepicker();
+
+//Å— ﬂ—œ‰ ‘—Õ Ê  Ê÷ÌÕ«   --- 
+
+if ($("#Description").getNumberRows() == 1 && $("#Description").getValue (1,1) =="") {
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',false);
+  	$("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  }else{
+	$("#Description").addRow();
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',false); 
+    $("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  };
+
+///// «ÌÃ«œ Ãœ«Ê· œ«œÂ «“ «ÿ·«⁄«  ﬁ»·Ì
+
+$("#Contract_Amendment_Selector").setOnchange(function(CT,CP,CAS,AS) {
+  
+  CAS = $("#Contract_Amendment_Selector").getValue();
+  
+  if (CAS == ""){
+    
+    $("#Latest_Contract").setValue($("#Contract_Finder").getValue()+"-"+(parseInt($("#Amendment_Counter").getValue())-1));
+    
+  } else {
+    
+    $("#Latest_Contract").setValue(CAS);
+    
+  }
+  
+});
+
+
+
+// Ê—Êœ «ÿ·«⁄«  Å«ÌÂ Â“Ì‰Â
+
+  var Amount_rows = $("#Amount_Show").getNumberRows();
+  
+  for (var i=1; i <= Amount_rows; i++) {
+      
+    $("#Amount").deleteRow();
+    
+  }
+  
+  for (var i=1 ; i <= Amount_rows; i++) {
+
+    $("#Amount").addRow();
+    $("#Amount").setValue(($("#Amount_Show").getValue(i,1)),i,1);
+    $("#Amount").setValue(($("#Amount_Show").getValue(i,2)),i,2);
+    $("#Amount").getControl(i,1).attr('disabled',true);
+    $("#Amount").getControl(i,2).attr('disabled',true);
+    	
+  }
+
+// Ê—Êœ «ÿ·«⁄«  Å«ÌÂ „Ê÷Ê⁄
+
+  var Subject_rows = $("#Subject_Show").getNumberRows();
+  
+  for (var i=1; i <= Subject_rows; i++) {
+    
+    $("#Subject").deleteRow();
+    
+  }
+  
+  for (var i= 1 ; i <= Subject_rows; i++) {
+
+    $("#Subject").addRow();
+    $("#Subject").setValue(($("#Subject_Show").getValue(i,1)),i,2);
+    $("#Subject").setValue(($("#Subject_Show").getValue(i,2)),i,3);
+    $("#Subject").getControl(i,1).attr('disabled',true);
+	$("#Subject").getControl(i,2).attr('disabled',true);
+	$("#Subject").getControl(i,3).attr('disabled',true);
+
+  }
+
+// Ê—Êœ «ÿ·«⁄«  Å«ÌÂ Å—ÊéÂ
+
+  var Project_rows = $("#Projects_Show").getNumberRows();
+
+  for (var i=1; i <= Project_rows; i++) {
+    
+    $("#Projects").deleteRow();
+    
+  }
+  
+  for (var i= 1 ; i <= Project_rows; i++) {
+
+    $("#Projects").addRow();
+    $("#Projects").setValue(($("#Projects_Show").getValue(i,1)),i,2);
+    $("#Projects").setValue(($("#Projects_Show").getValue(i,2)),i,3);
+    $("#Projects").getControl(i,1).attr('disabled',true);
+	$("#Projects").getControl(i,2).attr('disabled',true);
+	$("#Projects").getControl(i,3).attr('disabled',true);
+
+  }
+
+// Ê—Êœ «ÿ·«⁄«  „Õ·(Â«Ì) ›⁄«·Ì 
+
+  var Location_rows = $("#Location_Show").getNumberRows();
+
+  for (var i=1; i <= Location_rows; i++) {
+    
+    $("#Location").deleteRow();
+    
+  }
+  
+  for (var i= 1 ; i <= Location_rows; i++) {
+
+    $("#Location").addRow();
+    $("#Location").setValue(($("#Location_Show").getValue(i,1)),i,2);
+    $("#Location").setValue(($("#Location_Show").getValue(i,2)),i,3);
+    $("#Location").getControl(i,1).attr('disabled',true);
+	$("#Location").getControl(i,2).attr('disabled',true);
+	$("#Location").getControl(i,3).attr('disabled',true);
+
+  }
+
+// Ê—Êœ ÿ—›(Â«Ì) ﬁ—«—œ«œ
+
+  var Suppliers_rows = $("#Suppliers_Show").getNumberRows();
+
+  for (var i=1; i <= Suppliers_rows; i++) {
+    
+    $("#Suppliers").deleteRow();
+    
+  }
+  
+  for (var i= 1 ; i <= Suppliers_rows; i++) {
+
+    $("#Suppliers").addRow();
+    $("#Suppliers").setValue(($("#Suppliers_Show").getValue(i,1)),i,1);
+    $("#Suppliers").setValue(($("#Suppliers_Show").getValue(i,2)),i,2);
+    $("#Suppliers").getControl(i,1).attr('disabled',true);
+	$("#Suppliers").getControl(i,2).attr('disabled',true);
+
+  }
+
+// Ê—Êœ «›—«œ „— »ÿ
+
+  var Personnel_rows = $("#Personnel_Show").getNumberRows();
+
+  for (var i=1; i <= Personnel_rows; i++) {
+    
+    $("#Personnel").deleteRow();
+    
+  }
+  
+  for (var i= 1 ; i <= Personnel_rows; i++) {
+
+    $("#Personnel").addRow();
+    $("#Personnel").setValue(($("#Personnel_Show").getValue(i,1)),i,1);
+    $("#Personnel").setValue(($("#Personnel_Show").getValue(i,2)),i,2);
+    $("#Personnel").setValue(($("#Personnel_Show").getValue(i,3)),i,3);
+    $("#Personnel").setValue(($("#Personnel_Show").getValue(i,4)),i,4);
+    $("#Personnel").getControl(i,1).attr('disabled',true);
+	$("#Personnel").getControl(i,2).attr('disabled',true);
+	$("#Personnel").getControl(i,3).attr('disabled',true);
+    $("#Personnel").getControl(i,4).attr('disabled',true);
+
+  }
+
+
+// »——”Ì  €ÌÌ—«  “„«‰Ì
+
+$("#Contract_Duration_Latest").setOnchange(function(CDC) {
+  
+  $("#Contract_Duration").setValue(parseInt($("#Contract_Duration_Latest").getValue()));
+  
+});
+
+$("#Contract_Duration_Change").setValue("0");
+
+$("#Contract_Duration").setOnchange(function(CDC) {
+  
+  $("#Contract_Duration_Change").setValue(parseInt($("#Contract_Duration").getValue())-parseInt($("#Contract_Duration_Latest").getValue()));
+  
+  CDC = $("#Contract_Duration_Change").getValue();
+  
+  switch (true) {
+      
+    case (CDC  < 0):
+      $('#Contract_Duration_Change').css("background-color", "pink");
+      break;
+      
+    case (CDC  > 0):
+      $('#Contract_Duration_Change').css("background-color", "lightgreen");
+      break;
+      
+    case (CDC == 0 || CDC == ""):
+      $('#Contract_Duration_Change').css("background-color", "");
+      break;      
+      
+  }
+                                   
+});
+
+$("#Amendment_Time").setOnchange(function(AT) {
+
+  AT = $("#Amendment_Time").getValue();
+  
+  if (AT == 0) {
+    
+    $('#Contract_Duration').getControl().attr('disabled',true);
+    $('#Contract_Duration_Change').css("background-color", "");
+    $("#Contract_Duration").setValue(parseInt($("#Contract_Duration_Latest").getValue()));
+    $("#Contract_Duration_Change").setValue("0");
+    
+  } else {
+    
+    $('#Contract_Duration').getControl().attr('disabled',false);
+    
+  }
+  
+});
+
+// »——”Ì  €ÌÌ—«  Â“Ì‰Â
+
+// «ÌÃ«œ ÃœÊ· „»·€
+
+
+$("#Amendment_Cost").setOnchange(function(AC,i,Amount_rows) {
+  
+  Amount_rows = $("#Amount_Show").getNumberRows();
+  
+  for ( i=1; i <= Amount_rows; i++) {
+      
+        $("#Amount").deleteRow();
+    
+  }
+  
+  for ( i=1 ; i <= Amount_rows; i++) {
+
+    	$("#Amount").addRow();
+    	$("#Amount").setValue(($("#Amount_Show").getValue(i,1)),i,1);
+    	$("#Amount").setValue(($("#Amount_Show").getValue(i,2)),i,2);
+    	
+  AC = $("#Amendment_Cost").getValue();
+  
+  if (AC == 0) {
+    
+		$("#Amount").getControl(i,1).attr('disabled',true);
+    	$("#Amount").getControl(i,2).attr('disabled',true);
+    	$("#Amount").disabled = true;
+    
+  } else {
+    
+    $("#Amount").getControl(i,1).attr('disabled',false);
+    $("#Amount").getControl(i,2).attr('disabled',false);
+    $("#Amount").disabled = false;
+    
+  }
+    
+  }
+  
+});
+
+// »——”Ì «ÿ·«⁄«  „—»Êÿ »Â «ÿ·«⁄«  Ã«‰»Ì
+
+$("#submit0000000001").hide();
+
+
+$("#Check_Button").find("button").click(function(Subject,Suppliers,Personnel,Projects,Amount,Location,D,CTI,CT,CS,CP,Y,CC,AO,AOR,FVal,CVal,i,j,check,Counter){
+  
+$("#Counter").setValue("No");  
+  
+// „Ê÷Ê⁄ ﬁ—«—œ«œ 
+  
+  Counter = 0;
+  check = "Yes";
+  Subject = $("#Subject").getNumberRows();
+      i = 1; 
+      while (i-1 < Subject){
+      
+      	$("#Subject").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Subject) {
+    
+      FVal = $("#Subject").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì „Ê÷Ê⁄ ﬁ—«—œ«œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Subject').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Subject){
+        
+          CVal = $("#Subject").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì „Ê÷Ê⁄«  ﬁ—«—œ«œ „‘«»Â Â” ‰œ!");
+            $('#Subject').getControl(i,2).css("background-color", "pink");
+            $('#Subject').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Subject){
+      
+      	$("#Subject").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  }
+
+  
+// Å—ÊéÂùÂ«Ì „— »ÿ »« ﬁ—«—œ«œ 
+  
+  check = "Yes";
+  Projects = $("#Projects").getNumberRows();
+      i = 1; 
+      while (i-1 < Projects){
+      
+      	$("#Projects").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Projects) {
+    
+      FVal = $("#Projects").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì ÿ—› Å—ÊéÂùÂ«Ì „— »ÿ »« ﬁ—«—œ«œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Projects').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Projects){
+        
+          CVal = $("#Projects").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì Å—ÊéÂùÂ«Ì „— »ÿ »« ﬁ—«—œ«œ „‘«»Â Â” ‰œ!");
+            $('#Projects').getControl(i,2).css("background-color", "pink");
+            $('#Projects').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Projects){
+      
+      	$("#Projects").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  }
+  
+// Amount
+  
+check = "Yes";
+  Amount = $("#Amount").getNumberRows();
+      i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,1).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Amount) {
+    
+      FVal = $("#Amount").getValue(i,1);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì Ê«Õœ ÅÊ·Ì »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Amount').getControl(i,1).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Amount){
+        
+          CVal = $("#Amount").getValue(j,1);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì Ê«ÕœÂ«Ì ÅÊ·Ì „‘«»Â Â” ‰œ!");
+            $('#Amount').getControl(i,1).css("background-color", "pink");
+            $('#Amount').getControl(j,1).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+    if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,1).css("background-color", "lightgreen");
+        i++;
+      
+      }
+      
+      Counter++;
+      
+    }
+  
+  check = "Yes";
+  Amount = $("#Amount").getNumberRows();
+      i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Amount) {
+    
+      FVal = $("#Amount").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì „»·€ »—«Ì —œÌ› " + i + " œ—Ã ‘Êœ!");
+        $('#Amount').getControl(i,2).css("background-color", "pink");
+        check = "No";
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Amount){
+      
+      	$("#Amount").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    Counter++;
+  }
+  
+// Location
+  check = "Yes";
+  Location = $("#Location").getNumberRows();
+      i = 1; 
+      while (i-1 < Location){
+      
+      	$("#Location").getControl(i,2).css("background-color", "");
+        i++;
+      
+      }
+      
+      i = 1;
+      while (i-1 < Location) {
+    
+      FVal = $("#Location").getValue(i,2);
+    
+      if (FVal == "") {
+        
+        alert( "»«Ì” Ì „Õ·Â«Ì „— »ÿ »« ﬁ—«—œ«œ »—«Ì —œÌ› " + i + " «‰ Œ«» ‘Êœ!");
+        $('#Location').getControl(i,2).css("background-color", "pink");
+        check = "No";
+        
+      } else {
+      
+        j = i+1;
+      
+        while (j-1 < Location){
+        
+          CVal = $("#Location").getValue(j,2);
+                
+          if (FVal == CVal){
+            alert("—œÌ›Â«Ì " + i + " Ê " + j + " »—«Ì „Õ·Â«Ì „— »ÿ »« ﬁ—«—œ«œ „‘«»Â Â” ‰œ!");
+            $('#Location').getControl(i,2).css("background-color", "pink");
+            $('#Location').getControl(j,2).css("background-color", "pink");
+            check = "No";
+          }
+        j++;
+        } 
+
+      }
+    
+      i++;
+    }
+  
+  if (check == "Yes"){
+    i = 1; 
+      while (i-1 < Location){
+      
+      	$("#Location").getControl(i,2).css("background-color", "lightgreen");
+        i++;
+      
+      }
+    
+    Counter++;
+    
+  } 
+  
+  // »——”Ì ‘—Õ
+  
+    D =  $("#Description").getValue($("#Description").getNumberRows(),2);
+  	switch (true) {
+   
+    case ( D == ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      alert ("‰ﬂ«  „—»Êÿ »Â «ÌÃ«œ «ÿ·«⁄«  —« Ê«—œ ‰„«ÌÌœ ...");
+      break;
+        
+    case ( D != ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      Counter++;
+      break;        
+      
+  }  
+  
+  // »——”Ì ⁄‰Ê«‰ «·Õ«ﬁÌÂ
+  
+    CTI =  $("#Amendment_Title").getValue();
+  
+  	switch (true) {
+   
+    case ( CTI == ""):
+      $('#Amendment_Title').getControl().css("background-Color", "pink");
+      alert ("⁄‰Ê«‰ «·Õ«ﬁÌÂ —« Ê«—œ ‰„«ÌÌœ ...");
+      break;
+        
+    case ( CTI != ""):
+      $('#Amendment_Title').getControl().css("background-Color", "lightgreen");
+      Counter++;
+      break;        
+      
+  }  
+  
+  // »——”Ì ”«Ì—  €ÌÌ—«  «·Õ«ﬁÌÂ
+  
+    AOR =  $("#Amendment_Other_Remark").getValue();
+    AO =  $("#Amendment_Other").getValue();
+  
+  	switch (true) {
+   
+    case ( AO == 1 && AOR == ""):
+      $('#Amendment_Other_Remark').getControl().css("background-Color", "pink");
+      alert ("«ÿ·«⁄«  ”«Ì—  €ÌÌ—«  «·Õ«ﬁÌÂ —« Ê«—œ ‰„«ÌÌœ ...");
+      break;
+        
+    case ( AO == 0 ):
+      $('#Amendment_Other_Remark').getControl().css("background-Color", "");
+      $("#Amendment_Other_Remark").setValue("");
+      Counter++;
+      break; 
+        
+    case ( AO == 1 && AOR != "" ):
+      $('#Amendment_Other_Remark').getControl().css("background-Color", "lightgreen");
+      Counter++;
+      break; 
+      
+  }
+  
+  // »——”Ì Ê÷⁄Ì  «·Õ«ﬁÌÂ
+  
+   CS =  $("#Contract_Status").getValue();
+  
+  	switch (true) {
+   
+    case ( CS == 0):
+      $('#Contract_Status').getControl().css("background-Color", "pink");
+      alert ("Ê÷⁄Ì  «·Õ«ﬁÌÂ —« «‰ Œ«» ‰„«ÌÌœ ...");
+      break;
+        
+    case ( CS != 0):
+      $('#Contract_Status').getControl().css("background-Color", "lightgreen");
+      Counter++;
+      break;        
+      
+  }   
+  
+//  ‰„«Ì‘ œﬂ„Â À»  «ÿ·«⁄«  Ê  Ê·Ìœ ﬂœ ﬁ—«—œ«œ
+  
+  if (Counter == 9 ) {
+    
+    $("#submit0000000001").show();
+        
+  }
+  
+  
+});
+
+
+//  €ÌÌ—«  ‰„«Ì‘ Ãœ«Ê· ﬁ«»·  €ÌÌ—
+
+// ÃœÊ· Â“Ì‰Â
+
+$("#Amendment_Cost").setOnchange(function(Amount_rows,AC,i){
+
+AC = $("#Amendment_Cost").getValue();
+  
+  if (AC == 0) {
+  	    
+  Amount_rows = $("#Amount").getNumberRows();
+  
+  for ( i=1; i <= Amount_rows; i++) {
+      
+    $("#Amount").deleteRow();
+    
+  }
+  
+  for ( i=1 ; i <= $("#Amount_Show").getNumberRows(); i++) {
+
+    $("#Amount").addRow();
+    $("#Amount").setValue(($("#Amount_Show").getValue(i,1)),i,1);
+    $("#Amount").setValue(($("#Amount_Show").getValue(i,2)),i,2);
+    $("#Amount").getControl(i,1).attr('disabled',true);
+    $("#Amount").getControl(i,2).attr('disabled',true);
+    	
+  }
+    
+  } else {
+    
+    for ( i=1 ; i <= $("#Amount_Show").getNumberRows(); i++) {    
+    	$("#Amount").getControl(i,1).attr('disabled',false);
+    	$("#Amount").getControl(i,2).attr('disabled',false);
+      
+    }
+   
+  }
+    
+   
+});
+
+
+// ÃœÊ· „Ê÷Ê⁄«  ﬂ«—Ì
+
+$("#Amendment_Subject").setOnchange(function(Subject_rows,AS,i){
+  
+AS = $("#Amendment_Subject").getValue();
+  
+  
+  if (AS == 0) {
+    
+    Subject_rows = $("#Subject").getNumberRows();
+    
+    for (var i=1; i <= Subject_rows; i++) {
+      
+    	$("#Subject").deleteRow();
+      
+  	}
+  
+ 	for (var i= 1 ; i <= $("#Subject_Show").getNumberRows(); i++) {
+
+    	$("#Subject").addRow();
+    	$("#Subject").setValue(($("#Subject_Show").getValue(i,1)),i,2);
+    	$("#Subject").setValue(($("#Subject_Show").getValue(i,2)),i,3);
+    	$("#Subject").getControl(i,1).attr('disabled',true);
+		$("#Subject").getControl(i,2).attr('disabled',true);
+		$("#Subject").getControl(i,3).attr('disabled',true);
+
+  	}
+    
+  } else {
+    
+    for (var i= 1 ; i <= $("#Subject").getNumberRows(); i++) {
+    
+    	$("#Subject").getControl(i,1).attr('disabled',false);
+    	$("#Subject").getControl(i,2).attr('disabled',false);
+    	$("#Subject").getControl(i,3).attr('disabled',false);
+      
+    }
+    
+  }
+    
+});
+
+// ÃœÊ· Å—ÊéÂùÂ«
+
+$("#Amendment_Project").setOnchange(function(Project_rows,AP,i){
+  
+AP = $("#Amendment_Project").getValue();
+  
+  if (AP == 0) {
+    
+    Project_rows = $("#Projects").getNumberRows();
+    
+    for (var i=1; i <= Project_rows; i++) {
+      
+    	$("#Projects").deleteRow();
+      
+  	}
+  
+ 	for (var i= 1 ; i <= $("#Projects_Show").getNumberRows(); i++) {
+
+    	$("#Projects").addRow();
+    	$("#Projects").setValue(($("#Projects_Show").getValue(i,1)),i,2);
+    	$("#Projects").setValue(($("#Projects_Show").getValue(i,2)),i,3);
+    	$("#Projects").getControl(i,1).attr('disabled',true);
+		$("#Projects").getControl(i,2).attr('disabled',true);
+		$("#Projects").getControl(i,3).attr('disabled',true);
+
+  	}
+    
+  } else {
+    
+    for (var i= 1 ; i <= $("#Projects").getNumberRows(); i++) {
+    
+    	$("#Projects").getControl(i,1).attr('disabled',false);
+    	$("#Projects").getControl(i,2).attr('disabled',false);
+    	$("#Projects").getControl(i,3).attr('disabled',false);
+      
+    }
+    
+  }
+
+});
+
+// ÃœÊ· „Õ·(Â«Ì) ›⁄«·Ì 
+
+$("#Amendment_Location").setOnchange(function(Location_rows,AL,i){
+  
+AL = $("#Amendment_Location").getValue();
+  
+  if (AL == 0) {
+    
+    Location_rows = $("#Location").getNumberRows();
+    
+    for (var i=1; i <= Location_rows; i++) {
+      
+    	$("#Location").deleteRow();
+      
+  	}
+  
+ 	for (var i= 1 ; i <= $("#Location_Show").getNumberRows(); i++) {
+
+    	$("#Location").addRow();
+    	$("#Location").setValue(($("#Location_Show").getValue(i,1)),i,2);
+    	$("#Location").setValue(($("#Location_Show").getValue(i,2)),i,3);
+    	$("#Location").getControl(i,1).attr('disabled',true);
+		$("#Location").getControl(i,2).attr('disabled',true);
+		$("#Location").getControl(i,3).attr('disabled',true);
+
+  	}
+    
+  } else {
+    
+    for (var i= 1 ; i <= $("#Location").getNumberRows(); i++) {
+    
+    	$("#Location").getControl(i,1).attr('disabled',false);
+    	$("#Location").getControl(i,2).attr('disabled',false);
+    	$("#Location").getControl(i,3).attr('disabled',false);
+      
+    }
+    
+  }
+
+});
+
+
+// 
+
+$("#Amendment_Other").setOnchange(function(AO,i){
+  
+AO = $("#Amendment_Other").getValue();
+  
+  if (AO == 0) {
+    
+    $("#Amendment_Other_Remark").getControl().attr('disabled',true);
+    $("#Amendment_Other_Remark").setValue("");
+    $('#Amendment_Other_Remark').getControl().css("background-Color", "");
+    
+  } else {
+    
+    $("#Amendment_Other_Remark").getControl().attr('disabled',false);
+    
+  }
+
+});
+
+// ﬂ‰ —· œﬂ„Â «—”«· ›—„
+
+$("#729644775638309925b14d5071008987").setOnchange(function(){
+  
+  $("#submit0000000001").hide();
+  $("#Counter").setValue("No");
+  
+});

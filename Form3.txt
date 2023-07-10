@@ -1,0 +1,230 @@
+//‰„«Ì‘ ’›ÕÂ
+$("#3768310546386fc97103ca0091415282").css({"backgroundColor":"#ccccff"});
+$("#3768310546386fc97103ca0091415282").css({"border":"3px double #336699"});
+
+$("#title0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#336699","border-radius":"5px"});
+$("#title0000000001").css({"text-align":"center"});
+
+$("#subtitle0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000001").css({"text-align":"right"});
+$("#subtitle0000000002").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000002").css({"text-align":"right"});
+
+$("#subtitle0000000003").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000004").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000005").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000006").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000007").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000008").css({"font-family":"b titr","text-align":"right"});
+
+$("#Description").css({"font-family":"b Titr","background-color":"#ff9966","border-radius":"5px"});
+$("#Subject").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Suppliers").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});;;;
+$("#Personnel").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Projects").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Amount").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Location").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+
+$("#Subject_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Suppliers_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});;;;
+$("#Personnel_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Projects_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Amount_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Location_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+
+$("#submit0000000001").css({"font-family":"b titr","margin-top":"20px"});
+
+$("#Check_Button").css({"font-family":"b titr","margin-top":"20px"});
+
+
+$("#Contract_Counter").hide();
+$("#Select_Reg_Type").hide();
+$("#Contract_Type").hide();
+$("#Contract_Party").hide();
+$("#Contract_Amendment").hide();
+
+// «’·«Õ ‰„«Ì‘ ﬂœ Ê ⁄‰Ê«‰ «·Õ«ﬁÌÂ
+
+var CA = $("#Contract_Amendment").getValue();
+var SRT = $("#Select_Reg_Type").getValue();
+
+switch (true) {
+    
+  case (CA == 0) :
+    $("#Amendment_Code").hide();
+    $("#Amendment_Title").hide();
+    $("#Contract_Code").show();
+    $("#Contract_Title").show();
+    break;
+    
+  case (CA == 1 && SRT == 1) :
+    $("#Amendment_Code").show();
+    $("#Amendment_Title").show();
+    $("#Contract_Code").show();
+    $("#Contract_Title").show();
+    break; 
+    
+  case (CA == 1 && SRT != 1) :
+    $("#Amendment_Code").show();
+    $("#Amendment_Title").show();
+    $("#Contract_Code").hide();
+    $("#Contract_Title").hide();
+    break;    
+    
+}
+  
+
+// Å— ﬂ—œ‰ „ﬁ«œÌ— „ ‰Ì 2 ›Ì·œ
+  
+  var CT = $("#Contract_Type").getValue();
+  switch (true) {
+      
+    case (CT == 1):
+      $("#Contract_Type_Text").setValue("ﬂ«—›—„«ÌÌ");
+      break;
+      
+    case (CT == 2):
+      $("#Contract_Type_Text").setValue("ÅÌ„«‰ﬂ«—Ì");
+      break;
+      
+    case (CT == 3):
+      $("#Contract_Type_Text").setValue("„‘«—ﬂ Ì");
+      break;      
+      
+  }
+  
+  var CP = $("#Contract_Party").getValue();
+  switch (true) {
+      
+    case (CP == 'P'):
+      $("#Contract_Party_Text").setValue("ÕﬁÌﬁÌ");
+      break;
+      
+    case (CP == 'C'):
+      $("#Contract_Party_Text").setValue("ÕﬁÊﬁÌ");
+      break;
+      
+    case (CP == 'G'):
+      $("#Contract_Party_Text").setValue("‘—ﬂ Â«Ì ê—ÊÂ");
+      break;      
+      
+  }
+
+//  ›ﬂÌﬂ ‰„«Ì‘ «ÌÃ«œ / «’·«Õ / Õ–›
+
+$("#Contract_Status_Text").hide();
+
+switch (true) {
+  
+  case ($("#Select_Reg_Type").getValue() == 1 && $("#Contract_Amendment").getValue() == 0):
+    $("#Subject_Show").hide();
+    $("#Suppliers_Show").hide();
+    $("#Personnel_Show").hide();
+    $("#Projects_Show").hide();
+    $("#Amount_Show").hide();
+    $("#Location_Show").hide();
+    break;
+    
+  case ($("#Select_Reg_Type").getValue() == 3):
+    $("#Subject").hide();
+    $("#Suppliers").hide();
+    $("#Personnel").hide();
+    $("#Projects").hide();
+    $("#Amount").hide();
+    $("#Location").hide();
+    $("#Contract_Status_Text").show();
+    $("#Contract_Status").hide();
+    break;    
+    
+};
+
+
+//Å— ﬂ—œ‰ ‘—Õ Ê  Ê÷ÌÕ«   --- 
+
+if ($("#Description").getNumberRows() == 1 && $("#Description").getValue (1,1) =="") {
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',false);
+  	$("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  }else{
+	$("#Description").addRow();
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',false); 
+    $("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  };
+
+// »——”Ì «ÿ·«⁄«  „—»Êÿ »Â «ÿ·«⁄«  Ã«‰»Ì Ê  ÂÌÂ ﬂœ ﬁ—«—œ«œ
+
+$('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+  
+//  ‰„«Ì‘ œﬂ„Â À»  «ÿ·«⁄«  Ê  Ê·Ìœ ﬂœ ﬁ—«—œ«œ
+
+$("#Reg_Confirmation").setOnchange(function(RC,D) {
+  
+  RC = $("#Reg_Confirmation").getValue();
+  
+  switch (true) {
+    
+    case (RC == 0):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      $("#Description").setValue("",$("#Description").getNumberRows(),2);
+      alert ("‘—Õ ⁄œ„  «ÌÌœ —« Ê«—œ ‰„«ÌÌœ ...");
+      break;     
+      
+    case (RC == 1):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  ›Êﬁ  «ÌÌœ Ê À»  ‘œ.",$("#Description").getNumberRows(),2);
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      break;  
+      
+    case (RC == 2):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      $("#Description").setValue("",$("#Description").getNumberRows(),2);
+      alert ("‘—Õ «’·«Õ —« Ê«—œ ‰„«ÌÌœ ...");
+      break;     
+      
+  }
+  
+});
+
+$("#3768310546386fc97103ca0091415282").setOnSubmit(function(RC,D) {
+  
+  RC = $("#Reg_Confirmation").getValue();
+  D =  $("#Description").getValue($("#Description").getNumberRows(),2);
+
+  switch (true) {
+   
+    case (RC == "" && D == ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "pink");
+      return false;
+      break;
+      
+    case (RC == "" && D != ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "pink");
+      return false;
+      break;
+      
+    case (RC == 0 && D == ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      alert ("‘—Õ ⁄œ„  «ÌÌœ —« Ê«—œ ‰„«ÌÌœ ...");
+      return false;      
+      break;
+      
+    case (RC == 2 && D == ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "pink");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      alert ("‘—Õ «’·«Õ —« Ê«—œ ‰„«ÌÌœ ...");
+      return false;      
+      break;      
+      
+    case (RC != "" && D != ""):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      return true;      
+      break;      
+
+  }
+  
+});

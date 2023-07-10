@@ -1,0 +1,162 @@
+//‰„«Ì‘ ’›ÕÂ
+$("#507324218638efb761a0f76002245881").css({"backgroundColor":"#ccccff"});
+$("#507324218638efb761a0f76002245881").css({"border":"3px double #336699"});
+
+$("#title0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#336699","border-radius":"5px"});
+$("#title0000000001").css({"text-align":"center"});
+
+$("#subtitle0000000001").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000001").css({"text-align":"right"});
+$("#subtitle0000000002").css({"font-family":"b titr","color":"#ffffff","background-color":"#7a3969","border-radius":"5px"});
+$("#subtitle0000000002").css({"text-align":"right"});
+
+$("#Description").css({"font-family":"b Titr","background-color":"#ff9966","border-radius":"5px"});
+$("#Subject").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Suppliers").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});;;;
+$("#Personnel").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Projects").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Amount").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+$("#Location").css({"font-family":"b Titr","background-color":"#ffff99","border-radius":"5px"});
+
+$("#Subject_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Suppliers_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});;;;
+$("#Personnel_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Projects_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Amount_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+$("#Location_Show").css({"font-family":"b Titr","background-color":"#ffbf80","border-radius":"5px"});
+
+$("#Var_Comment_Member_Plan").css({"background-color":"#ffffcc","font-family":"b nazanin","margin-top":"20px"});
+
+$("#submit0000000001").css({"font-family":"b titr","margin-top":"20px"});
+
+$("#Check_Button").css({"font-family":"b titr","margin-top":"20px"});
+
+$("#subtitle0000000003").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000004").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000005").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000006").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000007").css({"font-family":"b titr","text-align":"right"});
+$("#subtitle0000000008").css({"font-family":"b titr","text-align":"right"});
+
+$("#Contract_Counter").hide();
+
+$("#Contract_Party_Text").setValue($("#Contract_Party").getText());
+$("#Contract_Type_Text").setValue($("#Contract_Type").getText());
+$("#Contract_Party").hide();
+$("#Contract_Type").hide();
+$("#Select_Reg_Type").hide();
+$("#Reg_Confirmation").hide();
+
+// «’·«Õ ‰„«Ì‘ ﬂœ Ê ⁄‰Ê«‰ «·Õ«ﬁÌÂ
+
+var CA = $("#Contract_Amendment").getValue();
+var SRT = $("#Select_Reg_Type").getValue();
+
+switch (true) {
+    
+  case (CA == 0) :
+    $("#Amendment_Code").hide();
+    $("#Amendment_Title").hide();
+    $("#Contract_Code").show();
+    $("#Contract_Title").show();
+    break;
+    
+  case (CA == 1 && SRT == 1) :
+    $("#Amendment_Code").show();
+    $("#Amendment_Title").show();
+    $("#Contract_Code").show();
+    $("#Contract_Title").show();
+    break; 
+    
+  case (CA == 1 && SRT != 1) :
+    $("#Amendment_Code").show();
+    $("#Amendment_Title").show();
+    $("#Contract_Code").hide();
+    $("#Contract_Title").hide();
+    break;    
+    
+}
+
+//  ›ﬂÌﬂ ‰„«Ì‘ «ÌÃ«œ / «’·«Õ / Õ–›
+
+$("#Contract_Status_Text").hide();
+
+switch (true) {
+  
+  case ($("#Select_Reg_Type").getValue() == 1 && $("#Contract_Amendment").getValue() == 0):
+    $("#Subject_Show").hide();
+    $("#Suppliers_Show").hide();
+    $("#Personnel_Show").hide();
+    $("#Projects_Show").hide();
+    $("#Amount_Show").hide();
+    $("#Location_Show").hide();
+    break;
+    
+  case ($("#Select_Reg_Type").getValue() == 3):
+    $("#Subject").hide();
+    $("#Suppliers").hide();
+    $("#Personnel").hide();
+    $("#Projects").hide();
+    $("#Amount").hide();
+    $("#Location").hide();
+    $("#Contract_Status_Text").show();
+    $("#Contract_Status").hide();
+    break;    
+    
+};
+
+
+//Å— ﬂ—œ‰ ‘—Õ Ê  Ê÷ÌÕ«   --- 
+
+if ($("#Description").getNumberRows() == 1 && $("#Description").getValue (1,1) =="") {
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',true);
+  	$("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  }else{
+	$("#Description").addRow();
+	$('#Description').getControl($("#Description").getNumberRows(),'2').attr('disabled',true); 
+    $("#Description").setValue($("#txt_name").getValue(),$("#Description").getNumberRows(),'1');
+  };
+
+//  ⁄ÌÌ‰ Ê÷⁄Ì   Ê÷ÌÕ« 
+
+var RC = $("#Reg_Confirmation").getValue();
+var SRT = $("#Select_Reg_Type").getValue();
+  
+switch (true) {
+    
+    case (RC == 0 && SRT == 1):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  «ÌÃ«œ ‘œÂ „—»Êÿ »Â ﬁ—«—œ«œ / «·Õ«ﬁÌÂ „—œÊœ ‘œ Ê À»  ‰ê—œÌœ .",$("#Description").getNumberRows(),2);
+      break;     
+      
+    case (RC == 1 && SRT == 1):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  «ÌÃ«œ ‘œÂ „—»Êÿ »Â ﬁ—«—œ«œ / «·Õ«ﬁÌÂ  «ÌÌœ ‘œ Ê À»  ê—œÌœ .",$("#Description").getNumberRows(),2);
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      break;  
+      
+    case (RC == 0 && SRT == 2):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  «’·«Õ ‘œÂ „—»Êÿ »Â ﬁ—«—œ«œ / «·Õ«ﬁÌÂ „—œÊœ ‘œ Ê À»  ‰ê—œÌœ .",$("#Description").getNumberRows(),2);
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      break; 
+    
+    case (RC == 1 && SRT == 2):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  «’·«Õ ‘œÂ „—»Êÿ »Â ﬁ—«—œ«œ / «·Õ«ﬁÌÂ  «ÌÌœ ‘œ Ê À»  ê—œÌœ .",$("#Description").getNumberRows(),2);
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      break;
+    
+    case (RC == 0 && SRT == 3):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  ‰Ì«“„‰œ »Â Õ–› „—»Êÿ »Â ﬁ—«—œ«œ / «·Õ«ﬁÌÂ „—œÊœ ‘œ Ê À»  ‰ê—œÌœ .",$("#Description").getNumberRows(),2);
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      break;   
+    
+    case (RC == 1 && SRT == 3):
+      $('#Description').getControl($("#Description").getNumberRows(),2).css("background-Color", "lightgreen");
+      $("#Description").setValue("«ÿ·«⁄«  ‰Ì«“„‰œ »Â Õ–› „—»Êÿ »Â ﬁ—«—œ«œ / «·Õ«ﬁÌÂ  «ÌÌœ ‘œ Ê À»  ê—œÌœ .",$("#Description").getNumberRows(),2);
+      $('#Reg_Confirmation').find("span.textlabel").css("background-color", "");
+      break;    
+    
+}

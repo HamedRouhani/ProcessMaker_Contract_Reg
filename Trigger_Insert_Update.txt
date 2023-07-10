@@ -1,0 +1,794 @@
+$Registered_By_USR_UID = @@ExecuteID;
+$Confirmed_By_USR_UID = @@ConfirmID;
+$Requested_By_USR_UID = @@RequestID ;
+$Time_Stamp = @@Time_Stamp;
+
+$Committee_Enactment_Number = @@Committee_Enactment_Number;
+$Committee_Enactment_Date = @@Committee_Enactment_Date;
+$Directors_Enactment_Number = @@Directors_Enactment_Number;
+$Directors_Enactment_Date = @@Directors_Enactment_Date;
+$Contract_Number = @@Contract_Number;
+$Contract_Date = @@Contract_Date;
+$Notification_Number = @@Notification_Number;
+$Notification_Date = @@Notification_Date;
+$Current_Year = @@Current_Year;
+$Contract_Active_Date = @@Contract_Active_Date;
+$Contract_Duration = @@Contract_Duration;
+$Contract_Type = @@Contract_Type;
+$Contract_Party = @@Contract_Party;
+$Contract_Status = @@Contract_Status;
+$Contract_Amendment=@@Contract_Amendment;
+$Budget_Number = @@Budget_Number;
+$Budget_Date = @@Budget_Date;
+
+if (@@Contract_Amendment == '1') {
+$Contract_Code = @@Amendment_Code;
+$Contract_Title = @@Amendment_Title;
+$Amendment_Cost = @@Amendment_Cost;
+$Amendment_Time = @@Amendment_Time;
+$Amendment_Subject = @@Amendment_Subject;
+$Amendment_Project = @@Amendment_Project;
+$Amendment_Location = @@Amendment_Location;
+$Amendment_Other = @@Amendment_Other;
+$Amendment_Other_Remark = @@Amendment_Other_Remark;
+} else {
+$Contract_Code = @@Contract_Code;
+$Contract_Title = @@Contract_Title;
+$Amendment_Cost = 0;
+$Amendment_Time = 0;
+$Amendment_Subject = 0;
+$Amendment_Project = 0;
+$Amendment_Location = 0;
+$Amendment_Other = 0;
+$Amendment_Other_Remark = "";
+}
+
+
+if (@@Select_Reg_Type == '1' and @@Reg_Confirmation == '1') 
+{
+
+$IsDelete = 0;
+$IsActive = 1;
+	
+$sql = "INSERT INTO PMT_TB110001 
+(Registered_By_USR_UID,
+Confirmed_By_USR_UID,
+Requested_By_USR_UID,
+Time_Stamp,
+IsDelete,
+IsActive,
+Contract_Code,
+Contract_Title,
+Committee_Enactment_Number,
+Committee_Enactment_Date,
+Directors_Enactment_Number,
+Directors_Enactment_Date,
+Contract_Number,
+Contract_Date,
+Notification_Number,
+Notification_Date,
+Current_Year,
+Contract_Active_Date,
+Contract_Duration,
+Contract_Type,
+Contract_Party,
+Contract_Status,
+Contract_Amendment,
+Budget_Number,
+Budget_Date,
+Amendment_Cost,
+Amendment_Time,
+Amendment_Subject,
+Amendment_Project,
+Amendment_Location,
+Amendment_Other,
+Amendment_Other_Remark)
+		
+		VALUES ('$Registered_By_USR_UID',
+		'$Confirmed_By_USR_UID',
+		'$Requested_By_USR_UID',
+		'$Time_Stamp',
+		'$IsDelete',
+		'$IsActive',
+		'$Contract_Code',
+		'$Contract_Title',
+		'$Committee_Enactment_Number',
+		'$Committee_Enactment_Date',
+		'$Directors_Enactment_Number',
+		'$Directors_Enactment_Date',
+		'$Contract_Number',
+		'$Contract_Date',
+		'$Notification_Number',
+		'$Notification_Date',
+		'$Current_Year',
+		'$Contract_Active_Date',
+		'$Contract_Duration',
+		'$Contract_Type',
+		'$Contract_Party',
+		'$Contract_Status',
+		'$Contract_Amendment',
+		'$Budget_Number',
+		'$Budget_Date',
+		'$Amendment_Cost',
+		'$Amendment_Time',
+		'$Amendment_Subject',
+		'$Amendment_Project',
+		'$Amendment_Location',
+		'$Amendment_Other',
+		'$Amendment_Other_Remark')";
+		executeQuery ($sql);
+
+ for ($i = 1; $i <= count(@=Subject); $i++) {	
+   $row = @=Subject[$i];
+   $Subject_Code = mysql_real_escape_string($row['Subject_Code']);
+   $Subject_Title = mysql_real_escape_string($row['Subject_Title']);
+   $Subjectsubsql = "INSERT INTO PMT_TB120015
+   (Registered_By_USR_UID,
+   Requested_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Subject_Code,
+   Subject_Title,
+   Contract_Subject_Rank) 
+VALUES ('$Registered_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Subject_Code',
+	'$Subject_Title',
+	'$i')";
+	 executeQuery ($Subjectsubsql);
+}	
+
+for ($i = 1; $i <= count(@=Suppliers); $i++) {	
+   $row = @=Suppliers[$i];
+   $Supplier_Code = mysql_real_escape_string($row['Supplier_Code']);
+   $Supplier_Full_Title = mysql_real_escape_string($row['Supplier_Full_Title']);
+   $Suppliersubsql = "INSERT INTO PMT_TB120016 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Supplier_Code,
+   Supplier_Full_Title,
+   Contract_Supplier_Rank) 
+VALUES ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Supplier_Code',
+	'$Supplier_Full_Title',
+	'$i')";
+	executeQuery ($Suppliersubsql);
+
+}
+	
+for ($k = 1; $k <= count(@=Personnel); $k++) {	
+   $row = @=Personnel[$k];
+   $System_Personal_Code = mysql_real_escape_string($row['System_Personal_Code']);
+   $ORG_Job_Code = mysql_real_escape_string($row['ORG_Job_Code']);
+   $Personnel_Name = mysql_real_escape_string($row['Personnel_Name']);
+   $Job_Title = mysql_real_escape_string($row['Job_Title']);
+   $Personnelsubsql = "INSERT INTO PMT_TB120017 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   System_Personal_Code,
+   ORG_Job_Code,
+   Personnel_Name,
+   Job_Title,
+   Contract_Personnel_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$System_Personal_Code',
+	'$ORG_Job_Code',
+	'$Personnel_Name',
+	'$Job_Title',
+	'$k')";
+	
+	executeQuery ($Personnelsubsql);
+}
+	
+for ($j = 1; $j <= count(@=Projects); $j++) {	
+   $row = @=Projects[$j];
+   $Project_Code = mysql_real_escape_string($row['Project_Code']);
+   $Project_Title = mysql_real_escape_string($row['Project_Title']);
+   $Projectsubsql = "INSERT INTO PMT_TB120018 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Project_Code,
+   Project_Title,
+   Contract_Project_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Project_Code',
+	'$Project_Title',
+	'$j')";
+	
+	executeQuery ($Projectsubsql);
+}
+
+for ($a = 1; $a <= count(@=Amount); $a++) {	
+   $row = @=Amount[$a];
+   $Amount_Type = mysql_real_escape_string($row['Amount_Type']);
+   $Amount_Value = mysql_real_escape_string($row['Amount_Value']);
+   $Amountsubsql = "INSERT INTO PMT_TB120019 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Amount_Type,
+   Amount_Value,
+   Contract_Amount_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Amount_Type',
+	'$Amount_Value',
+	'$a')";
+	
+	executeQuery ($Amountsubsql);
+}
+
+for ($b = 1; $b <= count(@=Location); $b++) {	
+   $row = @=Location[$b];
+   $Location_Code = mysql_real_escape_string($row['Location_Code']);
+   $Location_Title = mysql_real_escape_string($row['Location_Title']);
+   $Locationsubsql = "INSERT INTO PMT_TB120021 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Location_Code,
+   Location_Title,
+   Contract_Location_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Location_Code',
+	'$Location_Title',
+	'$b')";
+	
+		executeQuery ($Locationsubsql);
+	}
+		
+}
+
+
+if (@@Select_Reg_Type == '2' and @@Reg_Confirmation == '1')
+{
+
+$IsDelete = 0;
+$IsActive = 1;
+	
+$sql = "INSERT INTO PMT_TB110001 
+(Registered_By_USR_UID,
+Confirmed_By_USR_UID,
+Requested_By_USR_UID,
+Time_Stamp,
+IsDelete,
+IsActive,
+Contract_Code,
+Contract_Title,
+Committee_Enactment_Number,
+Committee_Enactment_Date,
+Directors_Enactment_Number,
+Directors_Enactment_Date,
+Contract_Number,
+Contract_Date,
+Notification_Number,
+Notification_Date,
+Current_Year,
+Contract_Active_Date,
+Contract_Duration,
+Contract_Type,
+Contract_Party,
+Contract_Status,
+Contract_Amendment,
+Budget_Number,
+Budget_Date,
+Amendment_Cost,
+Amendment_Time,
+Amendment_Subject,
+Amendment_Project,
+Amendment_Location,
+Amendment_Other,
+Amendment_Other_Remark)
+		
+		VALUES ('$Registered_By_USR_UID',
+		'$Confirmed_By_USR_UID',
+		'$Requested_By_USR_UID',
+		'$Time_Stamp',
+		'$IsDelete',
+		'$IsActive',
+		'$Contract_Code',
+		'$Contract_Title',
+		'$Committee_Enactment_Number',
+		'$Committee_Enactment_Date',
+		'$Directors_Enactment_Number',
+		'$Directors_Enactment_Date',
+		'$Contract_Number',
+		'$Contract_Date',
+		'$Notification_Number',
+		'$Notification_Date',
+		'$Current_Year',
+		'$Contract_Active_Date',
+		'$Contract_Duration',
+		'$Contract_Type',
+		'$Contract_Party',
+		'$Contract_Status',
+		'$Contract_Amendment',
+		'$Budget_Number',
+		'$Budget_Date',
+		'$Amendment_Cost',
+		'$Amendment_Time',
+		'$Amendment_Subject',
+		'$Amendment_Project',
+		'$Amendment_Location',
+		'$Amendment_Other',
+		'$Amendment_Other_Remark')";
+		executeQuery ($sql);
+
+ for ($i = 1; $i <= count(@=Subject); $i++) {	
+   $row = @=Subject[$i];
+   $Subject_Code = mysql_real_escape_string($row['Subject_Code']);
+   $Subject_Title = mysql_real_escape_string($row['Subject_Title']);
+   $Subjectsubsql = "INSERT INTO PMT_TB120015
+   (Registered_By_USR_UID,
+   Requested_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Subject_Code,
+   Subject_Title,
+   Contract_Subject_Rank) 
+VALUES ('$Registered_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Subject_Code',
+	'$Subject_Title',
+	'$i')";
+	 executeQuery ($Subjectsubsql);
+}	
+
+for ($i = 1; $i <= count(@=Suppliers); $i++) {	
+   $row = @=Suppliers[$i];
+   $Supplier_Code = mysql_real_escape_string($row['Supplier_Code']);
+   $Supplier_Full_Title = mysql_real_escape_string($row['Supplier_Full_Title']);
+   $Suppliersubsql = "INSERT INTO PMT_TB120016 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Supplier_Code,
+   Supplier_Full_Title,
+   Contract_Supplier_Rank) 
+VALUES ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Supplier_Code',
+	'$Supplier_Full_Title',
+	'$i')";
+	executeQuery ($Suppliersubsql);
+
+}
+	
+for ($k = 1; $k <= count(@=Personnel); $k++) {	
+   $row = @=Personnel[$k];
+   $System_Personal_Code = mysql_real_escape_string($row['System_Personal_Code']);
+   $ORG_Job_Code = mysql_real_escape_string($row['ORG_Job_Code']);
+   $Personnel_Name = mysql_real_escape_string($row['Personnel_Name']);
+   $Job_Title = mysql_real_escape_string($row['Job_Title']);
+   $Personnelsubsql = "INSERT INTO PMT_TB120017 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   System_Personal_Code,
+   ORG_Job_Code,
+   Personnel_Name,
+   Job_Title,
+   Contract_Personnel_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$System_Personal_Code',
+	'$ORG_Job_Code',
+	'$Personnel_Name',
+	'$Job_Title',
+	'$k')";
+	
+	executeQuery ($Personnelsubsql);
+}
+	
+for ($j = 1; $j <= count(@=Projects); $j++) {	
+   $row = @=Projects[$j];
+   $Project_Code = mysql_real_escape_string($row['Project_Code']);
+   $Project_Title = mysql_real_escape_string($row['Project_Title']);
+   $Projectsubsql = "INSERT INTO PMT_TB120018 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Project_Code,
+   Project_Title,
+   Contract_Project_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Project_Code',
+	'$Project_Title',
+	'$j')";
+	
+	executeQuery ($Projectsubsql);
+}
+
+for ($a = 1; $a <= count(@=Amount); $a++) {	
+   $row = @=Amount[$a];
+   $Amount_Type = mysql_real_escape_string($row['Amount_Type']);
+   $Amount_Value = mysql_real_escape_string($row['Amount_Value']);
+   $Amountsubsql = "INSERT INTO PMT_TB120019 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Amount_Type,
+   Amount_Value,
+   Contract_Amount_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Amount_Type',
+	'$Amount_Value',
+	'$a')";
+	
+	executeQuery ($Amountsubsql);
+}
+
+for ($b = 1; $b <= count(@=Location); $b++) {	
+   $row = @=Location[$b];
+   $Location_Code = mysql_real_escape_string($row['Location_Code']);
+   $Location_Title = mysql_real_escape_string($row['Location_Title']);
+   $Locationsubsql = "INSERT INTO PMT_TB120021 
+   (Registered_By_USR_UID,
+   Confirmed_By_USR_UID,
+   Requested_By_USR_UID,
+   Time_Stamp,
+   IsDelete,
+   IsActive,
+   Contract_Code,
+   Location_Code,
+   Location_Title,
+   Contract_Location_Rank) 
+VALUE ('$Registered_By_USR_UID',
+	'$Confirmed_By_USR_UID',
+	'$Requested_By_USR_UID',
+	'$Time_Stamp',
+	'$IsDelete',
+	'$IsActive',
+	'$Contract_Code',
+	'$Location_Code',
+	'$Location_Title',
+	'$b')";
+	
+		executeQuery ($Locationsubsql);
+	}
+	
+	
+$Contract_ID_Detector = @@Contract_ID_Detector;	
+$IsDelete = 0;
+$IsActive = 0;	
+	
+$sql = "UPDATE PMT_TB110001 SET 
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID ='$Contract_ID_Detector'";
+	
+	executeQuery ($sql);
+
+for ($a = 1; $a <= count(@=Subject_Show); $a++) {
+	
+    $row = @=Subject_Show[$a];
+	$Subject_ID_Detector = mysql_real_escape_string($row['Subject_ID_Detector']);
+
+$Subjectsubsql = "UPDATE PMT_TB120015 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Subject_ID_Detector'";
+	
+	executeQuery ($Subjectsubsql);
+	
+}
+	
+for ($b = 1; $b <= count(@=Suppliers_Show); $b++) {
+	
+    $row = @=Suppliers_Show[$b];
+	$Supplier_ID_Detector = mysql_real_escape_string($row['Supplier_ID_Detector']);
+
+$Suppliersubsql = "UPDATE PMT_TB120016 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Supplier_ID_Detector'";
+	
+	executeQuery ($Suppliersubsql);
+	
+}
+	
+for ($c = 1; $c <= count(@=Personnel_Show); $c++) {
+	
+    $row = @=Personnel_Show[$c];
+	$Personnel_ID_Detector = mysql_real_escape_string($row['Personnel_ID_Detector']);
+
+$Personnelsubsql = "UPDATE PMT_TB120017 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Personnel_ID_Detector'";
+	
+	executeQuery ($Personnelsubsql);
+	
+}
+	
+for ($d = 1; $d <= count(@=Projects_Show); $d++) {
+	
+    $row = @=Projects_Show[$d];
+	$Project_ID_Detector = mysql_real_escape_string($row['Project_ID_Detector']);
+
+$Projectsubsql = "UPDATE PMT_TB120018 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Project_ID_Detector'";
+	
+		executeQuery ($Projectsubsql);
+	
+}
+	
+for ($e = 1; $e <= count(@=Amount_Show); $e++) {
+	
+    $row = @=Amount_Show[$e];
+	$Amount_ID_Detector = mysql_real_escape_string($row['Amount_ID_Detector']);
+
+$Amountsubsql = "UPDATE PMT_TB120019 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Amount_ID_Detector'";
+	
+	executeQuery ($Amountsubsql);
+	
+}
+	
+for ($f = 1; $f <= count(@=Location_Show); $f++) {
+	
+    $row = @=Location_Show[$f];
+	$Location_ID_Detector = mysql_real_escape_string($row['Location_ID_Detector']);
+
+$Locationsubsql = "UPDATE PMT_TB120021 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Location_ID_Detector'";
+	
+	executeQuery ($Locationsubsql);
+	
+}	
+	
+}
+
+if (@@Select_Reg_Type == '3' and @@Reg_Confirmation == '1')
+{
+
+$Contract_ID_Detector = @@Contract_ID_Detector;
+$IsDelete = 1;
+$IsActive = 0;	
+	
+$sql = "UPDATE PMT_TB110001 SET 
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID ='$Contract_ID_Detector'";
+	
+	executeQuery ($sql);
+
+for ($a = 1; $a <= count(@=Subject_Show); $a++) {
+	
+    $row = @=Subject_Show[$a];
+	$Subject_ID_Detector = mysql_real_escape_string($row['Subject_ID_Detector']);
+
+$Subjectsubsql = "UPDATE PMT_TB120015 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Subject_ID_Detector'";
+	
+	executeQuery ($Subjectsubsql);
+	
+}
+	
+for ($b = 1; $b <= count(@=Suppliers_Show); $b++) {
+	
+    $row = @=Suppliers_Show[$b];
+	$Supplier_ID_Detector = mysql_real_escape_string($row['Supplier_ID_Detector']);
+
+$Suppliersubsql = "UPDATE PMT_TB120016 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Supplier_ID_Detector'";
+	
+	executeQuery ($Suppliersubsql);
+	
+}
+	
+for ($c = 1; $c <= count(@=Personnel_Show); $c++) {
+	
+    $row = @=Personnel_Show[$c];
+	$Personnel_ID_Detector = mysql_real_escape_string($row['Personnel_ID_Detector']);
+
+$Personnelsubsql = "UPDATE PMT_TB120017 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Personnel_ID_Detector'";
+	
+	executeQuery ($Personnelsubsql);
+	
+}
+	
+for ($d = 1; $d <= count(@=Projects_Show); $d++) {
+	
+    $row = @=Projects_Show[$d];
+	$Project_ID_Detector = mysql_real_escape_string($row['Project_ID_Detector']);
+
+$Projectsubsql = "UPDATE PMT_TB120018 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Project_ID_Detector'";
+	
+		executeQuery ($Projectsubsql);
+	
+}
+	
+for ($e = 1; $e <= count(@=Amount_Show); $e++) {
+	
+    $row = @=Amount_Show[$e];
+	$Amount_ID_Detector = mysql_real_escape_string($row['Amount_ID_Detector']);
+
+$Amountsubsql = "UPDATE PMT_TB120019 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Amount_ID_Detector'";
+	
+	executeQuery ($Amountsubsql);
+	
+}
+	
+for ($f = 1; $f <= count(@=Location_Show); $f++) {
+	
+    $row = @=Location_Show[$f];
+	$Location_ID_Detector = mysql_real_escape_string($row['Location_ID_Detector']);
+
+$Locationsubsql = "UPDATE PMT_TB120021 SET
+Registered_By_USR_UID = '$Registered_By_USR_UID',
+Confirmed_By_USR_UID = '$Confirmed_By_USR_UID',
+Requested_By_USR_UID = '$Requested_By_USR_UID',
+IsDelete = '$IsDelete',
+IsActive = '$IsActive' 
+WHERE ID = '$Location_ID_Detector'";
+	
+	executeQuery ($Locationsubsql);
+	
+}	
+	
+}
